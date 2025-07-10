@@ -33,6 +33,7 @@ namespace CodeBase.UI.Presenters
       _puzzleService.LevelDataSet += OnLevelDataSet;
       _puzzleService.PathPointAdded += OnPathPointAdded;
       _puzzleService.PathPointRemoved += OnPathPointRemoved;
+      _puzzleService.PathCleared += OnPathCleared;
 
       _mainColorProvider.ColorChanged += OnMainColorChanged;
     }
@@ -45,7 +46,7 @@ namespace CodeBase.UI.Presenters
 
     private void OnLevelDataSet()
     {
-      _gridView.Clear();
+      _gridView.FullClear();
       UpdateLineRenderer();
       
       SetNumPoints();
@@ -79,6 +80,13 @@ namespace CodeBase.UI.Presenters
         _gridView.SetCellColor(removedPointPosition, Color.clear);
         _gridView.SetCellColor(_puzzleService.GetLastPathPoint(), Color.clear);
       }
+      
+      UpdateLineRenderer();
+    }
+
+    private void OnPathCleared()
+    {
+      _gridView.ClearColors();
       
       UpdateLineRenderer();
     }

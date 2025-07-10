@@ -10,7 +10,7 @@ namespace CodeBase.Services
     IReadOnlyCollection<Vector2Int> PathPoints { get; }
     LevelData LevelData { get; }
 
-    event Action PathChanged;
+    event Action PathCleared;
     public event Action<Vector2Int> PathPointRemoved;
     public event Action<Vector2Int> PathPointAdded;
     event Action Solved;

@@ -18,7 +18,13 @@ namespace CodeBase.UI.Presenters
 
     private void OnEnable()
     {
-      _text.text = $"Your time is: {_timerService.CurrentTime}";
+      float time = _timerService.CurrentTime;
+      
+      int minutes = Mathf.FloorToInt(time / 60);
+      int seconds = Mathf.FloorToInt(time % 60);
+      int milliseconds = Mathf.FloorToInt((time * 100) % 100);
+      
+      _text.text = $"Your time is: {minutes:00}:{seconds:00}:{milliseconds:00}";
     }
   }
 }

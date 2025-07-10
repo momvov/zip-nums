@@ -104,7 +104,14 @@ namespace CodeBase.UI.Views
     public void SetCellColor(Vector2Int position, Color color) => 
       _cells[position.x, position.y].SetColor(color);
 
-    public void Clear()
+    public void FullClear()
+    {
+      ClearNums();
+
+      ClearColors();
+    }
+    
+    public void ClearNums()
     {
       foreach (NumPointView numPoint in _numPointsInUse)
       {
@@ -113,7 +120,10 @@ namespace CodeBase.UI.Views
       }
       
       _numPointsInUse.Clear();
-
+    }
+    
+    public void ClearColors()
+    {
       for (int y = 0; y < _size; y++)
         for (int x = 0; x < _size; x++) 
           _cells[x, y].SetColor(Color.clear);

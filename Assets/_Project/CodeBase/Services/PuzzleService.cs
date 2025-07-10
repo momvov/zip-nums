@@ -11,7 +11,7 @@ namespace CodeBase.Services
     public IReadOnlyCollection<Vector2Int> PathPoints => _pathPoints;
     public LevelData LevelData => _levelData;
 
-    public event Action PathChanged;
+    public event Action PathCleared;
     public event Action<Vector2Int> PathPointRemoved;
     public event Action<Vector2Int> PathPointAdded;
     public event Action LevelDataSet;
@@ -39,7 +39,6 @@ namespace CodeBase.Services
         Vector2Int removedPathPoint = _pathPoints[_pathPoints.Count - 1];
         _pathPoints.RemoveAt(_pathPoints.Count - 1);
         PathPointRemoved?.Invoke(removedPathPoint);
-        PathChanged?.Invoke();
         success = true;
       }
 
@@ -48,7 +47,6 @@ namespace CodeBase.Services
       {
         _pathPoints.Add(newPoint);
         PathPointAdded?.Invoke(newPoint);
-        PathChanged?.Invoke();
         success = true;
       }
       
@@ -63,7 +61,7 @@ namespace CodeBase.Services
       _pathPoints.Clear();
       _pathPoints.Add(_levelData.SolutionPath[0]);
       
-      PathChanged?.Invoke();
+      PathCleared?.Invoke();
     }
 
     public Vector2Int GetPathPointByIndex(int index) => 
